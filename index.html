@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Word Beater</title>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style-2.css">
+</head>
+
+<body>
+    <header>
+        <h1>Word Beater</h1>
+    </header>
+
+    <main>
+        <p>
+            Type The Given Word Within
+            <span>5</span>
+            Seconds:
+        </p>
+
+        <!-- Random Word -->
+        <h2 id="current-word">hello</h2>
+
+        <!-- Input Area -->
+        <input
+            type="text"
+            id="wordInput"
+            placeholder="Start typing..."
+            autocomplete="off"
+        >
+
+        <!-- Result Message -->
+        <p id="message"></p>
+
+        <!-- Restart Button -->
+        <button id="restartBtn">Restart Game</button>
+
+        <!-- Game Information -->
+        <div class="game-info">
+            <div>
+                <h3>Time Left:</h3>
+                <span id="time">5</span>
+            </div>
+
+            <div>
+                <h3>Score:</h3>
+                <span id="score">0</span>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <section class="instructions">
+            <h2>Instructions</h2>
+
+            <p>
+                Type each word in the given amount of seconds to score.
+                To play again, click the Restart Game button.
+                Your score will reset.
+            </p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

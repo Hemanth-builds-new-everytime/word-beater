@@ -1,0 +1,375 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap");
+
+/* =========================
+   Design tokens
+========================= */
+
+:root {
+    --bg: #0b0b16;
+    --surface: #131326;
+    --surface-2: #0e0e1d;
+    --border: #2a2a4a;
+    --text: #eef0ff;
+    --muted: #8b8fb0;
+
+    --cyan: #00f0ff;
+    --pink: #ff3cac;
+    --yellow: #ffd84a;
+    --success: #4ade9b;
+    --danger: #ff5c5c;
+
+    --font-pixel: "Press Start 2P", "Courier New", monospace;
+    --font-ui: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-ui);
+    background:
+        radial-gradient(ellipse 70% 45% at 50% -10%, rgba(255, 60, 172, 0.16), transparent 70%),
+        radial-gradient(ellipse 60% 40% at 50% 110%, rgba(0, 240, 255, 0.10), transparent 70%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================
+   Arcade backdrop: grid + CRT scanlines
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+            mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, 0.12) 3px
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+header {
+    padding: 48px 20px 8px;
+}
+
+header h1 {
+    font-family: var(--font-pixel);
+    font-size: clamp(16px, 3.6vw, 26px);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    color: var(--cyan);
+    text-shadow:
+        3px 3px 0 var(--pink),
+        0 0 18px rgba(0, 240, 255, 0.45);
+}
+
+
+/* =========================
+   Main game cabinet
+========================= */
+
+main {
+    width: 640px;
+    max-width: calc(100% - 32px);
+    margin: 32px auto 64px;
+    padding: 44px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    box-shadow:
+        0 0 0 4px var(--bg),
+        0 0 0 6px rgba(255, 60, 172, 0.55),
+        0 0 40px rgba(255, 60, 172, 0.18),
+        0 30px 60px -20px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================
+   Instruction text
+========================= */
+
+main > p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 32px;
+}
+
+main > p span {
+    color: var(--yellow);
+    font-weight: 700;
+}
+
+
+/* =========================
+   Current word: the hero
+========================= */
+
+#current-word {
+    font-family: var(--font-pixel);
+    font-size: clamp(22px, 6vw, 38px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--pink);
+    margin-bottom: 32px;
+    padding: 30px 16px;
+    background: var(--surface-2);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    word-break: break-word;
+    text-shadow:
+        0 0 6px rgba(255, 60, 172, 0.8),
+        0 0 22px rgba(255, 60, 172, 0.45);
+    box-shadow: inset 0 0 30px rgba(255, 60, 172, 0.07);
+}
+
+
+/* =========================
+   Input
+========================= */
+
+#wordInput {
+    width: 100%;
+    padding: 16px 20px;
+
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+
+    color: var(--text);
+    background: var(--surface-2);
+
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+
+    caret-color: var(--cyan);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#wordInput::placeholder {
+    color: #565a7a;
+    font-weight: 500;
+}
+
+#wordInput:focus {
+    border-color: var(--cyan);
+    box-shadow:
+        0 0 0 4px rgba(0, 240, 255, 0.14),
+        0 0 20px rgba(0, 240, 255, 0.25);
+}
+
+
+/* =========================
+   Message
+========================= */
+
+#message {
+    min-height: 28px;
+    margin-top: 18px;
+
+    font-family: var(--font-pixel);
+    font-size: 11px;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+#message.correct { color: var(--success); text-shadow: 0 0 10px rgba(74, 222, 155, 0.6); }
+#message.wrong   { color: var(--danger);  text-shadow: 0 0 10px rgba(255, 92, 92, 0.6); }
+
+
+/* =========================
+   Score / time panels
+========================= */
+
+.game-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.game-info > div {
+    padding: 20px 16px;
+    background: var(--surface-2);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+.game-info h3 {
+    display: block;
+    margin-bottom: 14px;
+
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.game-info span {
+    font-family: var(--font-pixel);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--yellow);
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 12px rgba(255, 216, 74, 0.45);
+}
+
+
+/* =========================
+   Restart button: chunky arcade key
+========================= */
+
+#restartBtn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 18px;
+
+    font-family: var(--font-pixel);
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    color: #1a0a14;
+    background: var(--pink);
+
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+
+    box-shadow: 0 6px 0 #a3206f, 0 12px 24px -8px rgba(255, 60, 172, 0.55);
+    transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+}
+
+#restartBtn:hover {
+    filter: brightness(1.1);
+}
+
+#restartBtn:active {
+    transform: translateY(5px);
+    box-shadow: 0 1px 0 #a3206f, 0 4px 10px -4px rgba(255, 60, 172, 0.5);
+}
+
+#restartBtn:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+
+/* =========================
+   Instructions
+========================= */
+
+.instructions {
+    margin-top: 32px;
+    padding: 22px 24px;
+    text-align: left;
+
+    background: transparent;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-md);
+}
+
+.instructions h2 {
+    font-family: var(--font-pixel);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--cyan);
+    margin-bottom: 14px;
+}
+
+.instructions p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 600px) {
+
+    header {
+        padding-top: 32px;
+    }
+
+    main {
+        padding: 28px 18px;
+        box-shadow:
+            0 0 0 3px var(--bg),
+            0 0 0 5px rgba(255, 60, 172, 0.55),
+            0 20px 40px -20px rgba(0, 0, 0, 0.7);
+    }
+
+    #current-word {
+        padding: 24px 10px;
+    }
+
+    .game-info {
+        grid-template-columns: 1fr;
+    }
+
+    .game-info span {
+        font-size: 22px;
+    }
+
+    #wordInput {
+        font-size: 16px; /* prevents iOS zoom on focus */
+    }
+}
+
+
+/* =========================
+   Reduced motion
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

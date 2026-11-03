@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Word Beater | Typing Game</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Generated Tailwind CSS -->
+    <link rel="stylesheet" href="./tailwind.css">
+</head>
+
+<body class="min-h-screen bg-[#f4efe6] font-sans text-center text-[#29222d]">
+
+    <!-- Header -->
+    <header class="px-5 pt-8 pb-3">
+        <p class="mb-2 text-xs font-bold uppercase tracking-[3px] text-[#e86a33]">
+            Typing speed challenge
+        </p>
+
+        <h1 class="font-display text-[34px] font-bold tracking-tight max-sm:text-[28px]">
+            Word Beater<span class="text-[#e86a33]">.</span>
+        </h1>
+    </header>
+
+
+    <!-- Main Game Card -->
+    <main class="mx-auto mt-8 mb-14 w-[calc(100%_-_30px)] max-w-[650px] rounded-[28px] border-2 border-[#29222d] bg-[#fffdf9] p-10 shadow-[8px_8px_0_#29222d] max-sm:mt-6 max-sm:rounded-[22px] max-sm:p-6 max-sm:shadow-[5px_5px_0_#29222d]">
+
+        <!-- Game Description -->
+        <p class="mb-8 text-sm font-medium leading-relaxed text-[#77717a] sm:text-base">
+            Type the given word within
+            <span class="font-extrabold text-[#e86a33]">5 seconds</span>
+        </p>
+
+
+        <!-- Random Word -->
+        <div class="mb-7 rounded-2xl bg-[#f4efe6] px-3 py-7 sm:py-9">
+            <p class="mb-3 text-[10px] font-bold uppercase tracking-[2px] text-[#958b98]">
+                Your word
+            </p>
+
+            <h2
+                id="current-word"
+                class="break-words font-display text-[42px] font-bold tracking-tight text-[#4f3d75] sm:text-[52px]"
+            >
+                hello
+            </h2>
+        </div>
+
+
+        <!-- Input Area -->
+        <label for="wordInput" class="mb-2 block text-left text-xs font-bold uppercase tracking-wider text-[#77717a]">
+            Type here
+        </label>
+
+        <input
+            type="text"
+            id="wordInput"
+            placeholder="Start typing..."
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            class="w-full rounded-xl border-2 border-[#d8d0c4] bg-white px-4 py-4 text-base font-semibold text-[#29222d] outline-none transition placeholder:font-normal placeholder:text-[#aaa1a9] focus:border-[#4f3d75] focus:ring-4 focus:ring-[#4f3d75]/10"
+        >
+
+
+        <!-- Result Message -->
+        <p
+            id="message"
+            aria-live="polite"
+            class="mt-4 min-h-[26px] text-sm font-bold"
+        ></p>
+
+
+        <!-- Game Information -->
+        <div class="mt-6 grid grid-cols-2 gap-4">
+
+            <!-- Time Card -->
+            <div class="rounded-2xl border-2 border-[#29222d] bg-[#ffe4c7] p-4 text-left sm:p-5">
+                <div class="mb-3 flex items-center gap-2">
+                    <span class="flex size-8 items-center justify-center rounded-lg bg-white/70 text-lg">
+                        ⏱
+                    </span>
+
+                    <h3 class="text-[10px] font-extrabold uppercase tracking-wider text-[#746d75] sm:text-xs">
+                        Time Left
+                    </h3>
+                </div>
+
+                <div class="flex items-baseline gap-2">
+                    <span
+                        id="time"
+                        class="font-display text-3xl font-bold text-[#c45b24] sm:text-4xl"
+                    >
+                        5
+                    </span>
+
+                    <span class="text-xs font-semibold text-[#8b776c]">
+                        seconds
+                    </span>
+                </div>
+            </div>
+
+
+            <!-- Score Card -->
+            <div class="rounded-2xl border-2 border-[#29222d] bg-[#dff2df] p-4 text-left sm:p-5">
+                <div class="mb-3 flex items-center gap-2">
+                    <span class="flex size-8 items-center justify-center rounded-lg bg-white/70 text-lg">
+                        ★
+                    </span>
+
+                    <h3 class="text-[10px] font-extrabold uppercase tracking-wider text-[#627568] sm:text-xs">
+                        Your Score
+                    </h3>
+                </div>
+
+                <div class="flex items-baseline gap-2">
+                    <span
+                        id="score"
+                        class="font-display text-3xl font-bold text-[#287447] sm:text-4xl"
+                    >
+                        0
+                    </span>
+
+                    <span class="text-xs font-semibold text-[#718777]">
+                        points
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Restart Button -->
+        <button
+            id="restartBtn"
+            type="button"
+            class="mt-5 w-full cursor-pointer rounded-xl border-2 border-[#29222d] bg-[#4f3d75] px-5 py-4 font-sans text-sm font-bold text-white shadow-[0_5px_0_#29222d] transition hover:-translate-y-0.5 hover:bg-[#624d90] hover:shadow-[0_7px_0_#29222d] active:translate-y-1 active:shadow-none"
+        >
+            ↻ &nbsp; Restart Game
+        </button>
+
+
+        <!-- Instructions -->
+        <section class="mt-9 border-t border-[#e8e1d7] pt-6 text-left">
+            <h2 class="mb-3 font-display text-base font-bold text-[#4f3d75]">
+                How to play
+            </h2>
+
+            <p class="text-[13px] leading-7 text-[#807982]">
+                Type the displayed word correctly before the timer reaches zero
+                to earn a point. Each correct answer resets the timer to five
+                seconds. Game over? Press Restart Game to try again.
+            </p>
+        </section>
+
+    </main>
+
+
+    <!-- Keep your existing JavaScript -->
+    <script src="./script.js"></script>
+
+</body>
+</html>
